@@ -1,0 +1,40 @@
+version: "3.7"
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    environment: 
+      - CONTENTFUL_SPACE=${CONTENTFUL_SPACE}
+      - CONTENTFUL_TOKEN=${CONTENTFUL_TOKEN}
+      - CONTENTFUL_ENV=${CONTENTFUL_ENV}
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    command: bundle exec ruby app.rb
+    links:
+      - frontend
+    depends_on: 
+      - frontend
+  backend_test:
+    container_name: backend_test
+    build: ./backend
+    environment:
+      - CONTENTFUL_SPACE=kk2bw5ojx476
+      - CONTENTFUL_TOKEN=7ac531648a1b5e1dab6c18b0979f822a5aad0fe5f1109829b8a197eb2be4b84c
+      - CONTENTFUL_ENV=master
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    command: bundle exec rspec spec
+  frontend:
+    build: ./frontend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+    command: "npm start"
