@@ -1,6 +1,5 @@
 require 'contentful'
 require "./lib/initialize/application.rb"
-require 'byebug'
 
 module Tools
   module GetContent

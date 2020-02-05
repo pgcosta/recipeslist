@@ -3,7 +3,6 @@ require 'sinatra/cross_origin'
 require "sinatra/reloader"
 require './lib/tools/get_content'
 require 'json'
-require 'byebug'
 
 set :port, 8080
 set :bind, '0.0.0.0'
