@@ -13,7 +13,7 @@ services:
     volumes:
       - ./backend:/app
     working_dir: /app
-    command: bundle exec ruby app.rb
+    command: ruby app.rb
     links:
       - frontend
     depends_on: 
